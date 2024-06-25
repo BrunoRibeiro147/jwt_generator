@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  core:
+    build:
+      context: .
+      target: build
+      dockerfile: Dockerfile
+    command: iex -S mix
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    expose:
+      - "4000"
+
+    volumes:
+      - .:/app
+      - core_build:/app/_build/
+      - core_deps:/app/deps
+
+volumes:
+  core_build:
+  core_deps:
